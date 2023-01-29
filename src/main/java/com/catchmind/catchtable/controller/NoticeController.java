@@ -1,10 +1,8 @@
 package com.catchmind.catchtable.controller;
 
 import com.catchmind.catchtable.domain.network.request.AskRequest;
-import com.catchmind.catchtable.dto.AskDto;
-import com.catchmind.catchtable.dto.ImprovementDto;
-import com.catchmind.catchtable.dto.NoticeDto;
-import com.catchmind.catchtable.dto.ProfileDto;
+import com.catchmind.catchtable.domain.network.request.ImprovementRequest;
+import com.catchmind.catchtable.dto.*;
 import com.catchmind.catchtable.dto.security.CatchPrincipal;
 import com.catchmind.catchtable.repository.AskRepository;
 import com.catchmind.catchtable.repository.ImprovementRepository;
@@ -17,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,9 +42,13 @@ public class NoticeController {
     }
 
     //공지사항 상세
-    @GetMapping("/notice/content")
-    public ModelAndView noticeContent() {
-        return new ModelAndView("notice/notice_review");
+    @GetMapping("/notice/content/{noIdx}")
+    public String noticeContent(Model model, @PathVariable Long noIdx) {
+//        List<NoticeDto> noticeDtoList = noticeRepository.findAll().stream().map(NoticeDto::from).toList();
+        NoticeDto noticeDto = noticeService.getNotice(noIdx);
+        model.addAttribute("content", noticeDto);
+//        model.addAttribute("content", noticeDtoList);
+        return "notice/notice_review";
     }
 
     // 이용약관
@@ -83,11 +86,11 @@ public class NoticeController {
         return "notice/contact2";
     }
 
-    // 1대1문의 작성내용 저장
+    // 1대1문의 작성 내용 저장
     @PostMapping("/support/contact/write")
     public String contactWrite(AskRequest askRequest) {
         noticeService.saveFile(askRequest);
-        return "redirect:/notice/contact1";
+        return "redirect:/support/contact";         // support로 수정
     }
     
     // 개선제안 리스트
@@ -105,6 +108,13 @@ public class NoticeController {
         Long prIdx = catchPrincipal.prIdx();
         model.addAttribute("prIdx", prIdx);
         return "notice/improve2";
+    }
+
+    // 개선제안 작성 내용 저장
+    @PostMapping("/support/improve/write")
+    public String improveWrite(ImprovementRequest improvementRequest) {
+        noticeService.saveImprovementFile(improvementRequest);
+        return "redirect:/support/improve";     // 돌아가자마자 status값이 null 이라서 리스트페이지에서 오류인듯   // support로 수정
     }
 
     // 신고내역

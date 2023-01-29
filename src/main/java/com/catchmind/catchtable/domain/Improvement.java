@@ -1,6 +1,7 @@
 package com.catchmind.catchtable.domain;
 
 import com.catchmind.catchtable.domain.type.AskStatus;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -35,5 +36,14 @@ public class Improvement extends AuditingFields {
         this.impStatus = impStatus;
     }
 
+    public Improvement(String impTitle, String impContent, Profile profile, String impAnswer) {
+        this.impTitle = impTitle;
+        this.impContent = impContent;
+        this.profile = profile;
+        this.impAnswer = impAnswer;
+    }
 
+    public static Improvement of(String impTitle, String impContent, Profile profile, String impAnswer) {
+        return new Improvement(impTitle, impContent, profile, impAnswer);
+    }
 }

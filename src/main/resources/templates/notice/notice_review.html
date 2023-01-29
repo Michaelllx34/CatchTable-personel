@@ -22,21 +22,22 @@
                 <div class="css-qwe8mt emilzgk1">공지사항</div>
                 <div class="css-1funedv emilzgk0">캐치 테이블의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요.</div>
             </div>
-            <div class="css-1t45bai erzmnr90">
+            <div class="css-1t45bai erzmnr90" th:each="content: ${content}">
                 <div class="css-1dhg94g e1pwb5hv0">
                     <div class="css-1xrh39a e1pwb5hv2">제목</div>
-                    <div class="css-8vgw34 e1pwb5hv1">[안내] 스마일페이 시스템 점검 안내 (2022.12.18)</div>
+                    <div class="css-8vgw34 e1pwb5hv1" th:text="${content.noTitle()}">[안내] 스마일페이 시스템 점검 안내 (2022.12.18)</div>
                 </div>
                 <div class="css-1dhg94g e1pwb5hv0">
                     <div class="css-1xrh39a e1pwb5hv2">작성자</div>
-                    <div class="css-8vgw34 e1pwb5hv1">컬리</div>
+                    <div class="css-8vgw34 e1pwb5hv1" th:text="${content.adminDto().adName()}">컬리</div>
                 </div>
                 <div class="css-1dhg94g e1pwb5hv0">
                     <div class="css-1xrh39a e1pwb5hv2">작성일</div>
-                    <div class="css-8vgw34 e1pwb5hv1">2022.12.14</div>
+                    <div class="css-8vgw34 e1pwb5hv1" th:text="${#temporals.format(content.regDate, 'yyyy.MM.dd')}">2022.12.14</div>
                 </div>
                 <div class="css-1xvp3jp ezf0ge90">
                     <div>
+                        <p th:text="${content.noContent()}"></p>
                         <p><img alt="image" src="//lacms-board.kurly.com/board/notice/20221214/1344c951-4a6e-48d3-b6a6-8a6854c4bb98.jpg"></p>
                     </div>
                 </div>
