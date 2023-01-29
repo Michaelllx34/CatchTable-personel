@@ -24,7 +24,7 @@ public class QNotice extends EntityPathBase<Notice> {
 
     public final QAuditingFields _super = new QAuditingFields(this);
 
-    public final QAdmin adName;
+    public final QAdmin admin;
 
     public final StringPath noContent = createString("noContent");
 
@@ -56,7 +56,7 @@ public class QNotice extends EntityPathBase<Notice> {
 
     public QNotice(Class<? extends Notice> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.adName = inits.isInitialized("adName") ? new QAdmin(forProperty("adName")) : null;
+        this.admin = inits.isInitialized("admin") ? new QAdmin(forProperty("admin")) : null;
     }
 
 }

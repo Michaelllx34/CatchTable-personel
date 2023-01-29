@@ -3,10 +3,12 @@ package com.catchmind.catchtable.controller;
 import com.catchmind.catchtable.domain.network.request.AskRequest;
 import com.catchmind.catchtable.dto.AskDto;
 import com.catchmind.catchtable.dto.ImprovementDto;
+import com.catchmind.catchtable.dto.NoticeDto;
 import com.catchmind.catchtable.dto.ProfileDto;
 import com.catchmind.catchtable.dto.security.CatchPrincipal;
 import com.catchmind.catchtable.repository.AskRepository;
 import com.catchmind.catchtable.repository.ImprovementRepository;
+import com.catchmind.catchtable.repository.NoticeRepository;
 import com.catchmind.catchtable.service.NoticeService;
 import com.catchmind.catchtable.service.ProfileLogicService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NoticeController {
 
+    private final NoticeRepository noticeRepository;
     private final AskRepository askRepository;
     private final ImprovementRepository improvementRepository;
     private final NoticeService noticeService;
@@ -33,8 +36,10 @@ public class NoticeController {
 
     // 공지사항 리스트 페이지
     @GetMapping("/notice")
-    public ModelAndView notice() {
-        return new ModelAndView("notice/notice");
+    public String notice(Model model) {
+        List<NoticeDto> noticeDtoList = noticeRepository.findAll().stream().map(NoticeDto::from).toList();
+        model.addAttribute("notice", noticeDtoList);
+        return "notice/notice";
     }
 
     //공지사항 상세
@@ -78,7 +83,7 @@ public class NoticeController {
         return "notice/contact2";
     }
 
-    // 1대1문의 작성 내용 저장
+    // 1대1문의 작성내용 저장
     @PostMapping("/support/contact/write")
     public String contactWrite(AskRequest askRequest) {
         noticeService.saveFile(askRequest);

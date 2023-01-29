@@ -16,20 +16,20 @@ public class Notice extends AuditingFields{
     private Long noIdx;             // 공지사항 번호
     private String noTitle;         // 공지사항 제목
     @ManyToOne(optional = false)
-    @JoinColumn(name = "ad_name")   // ??           // pk 이름
-    private Admin adName;           // 관리자 이름(CatchTable로 고정)
+    @JoinColumn(name = "ad_idx")   // ad_idx로 관리자이름 찾기
+    private Admin admin;            // 관리자 이름(CatchTable로 고정)
     private String noContent;       // 공지사항 내용
 
     protected Notice() {}
 
-    public Notice(String noTitle, Admin adName, String noContent) {
+    public Notice(String noTitle, Admin admin, String noContent) {
         this.noTitle = noTitle;
-        this.adName = adName;
+        this.admin = admin;
         this.noContent = noContent;
     }
 
-    public static Notice of(String noTitle, Admin adName, String noContent){
-        return new Notice(noTitle, adName, noContent);
+    public static Notice of(String noTitle, Admin admin, String noContent){
+        return new Notice(noTitle, admin, noContent);
     }
 
     @Override
