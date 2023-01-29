@@ -30,7 +30,7 @@ public class QImprovement extends EntityPathBase<Improvement> {
 
     public final NumberPath<Long> impIdx = createNumber("impIdx", Long.class);
 
-    public final StringPath impStatus = createString("impStatus");
+    public final EnumPath<com.catchmind.catchtable.domain.type.AskStatus> impStatus = createEnum("impStatus", com.catchmind.catchtable.domain.type.AskStatus.class);
 
     public final StringPath impTitle = createString("impTitle");
 

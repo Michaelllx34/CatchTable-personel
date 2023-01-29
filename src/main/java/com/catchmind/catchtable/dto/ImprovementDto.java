@@ -3,6 +3,7 @@ package com.catchmind.catchtable.dto;
 import com.catchmind.catchtable.domain.Improvement;
 import com.catchmind.catchtable.domain.Notice;
 import com.catchmind.catchtable.domain.Profile;
+import com.catchmind.catchtable.domain.type.AskStatus;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +24,7 @@ public record ImprovementDto(
                 improvement.getImpContent(),
                 ProfileDto.from(improvement.getProfile()),
                 improvement.getImpAnswer(),
-                improvement.getImpStatus(),
+                improvement.getImpStatus().getDescription(),
                 improvement.getRegDate(),
                 improvement.getUpdateDate()
         );

@@ -78,6 +78,7 @@ public class NoticeController {
         return "notice/contact2";
     }
 
+    // 1대1문의 작성 내용 저장
     @PostMapping("/support/contact/write")
     public String contactWrite(AskRequest askRequest) {
         noticeService.saveFile(askRequest);
@@ -92,11 +93,13 @@ public class NoticeController {
         model.addAttribute("notice", improvementDtoList);
         return "notice/improve1";
     }
-    
+
     //개선제안 작성
     @GetMapping("/support/improve/write")
-    public ModelAndView improveWrite() {
-        return new ModelAndView("notice/improve2");
+    public String improveWrite(Model model, @AuthenticationPrincipal CatchPrincipal catchPrincipal) {
+        Long prIdx = catchPrincipal.prIdx();
+        model.addAttribute("prIdx", prIdx);
+        return "notice/improve2";
     }
 
     // 신고내역
