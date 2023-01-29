@@ -18,4 +18,10 @@ public class ProfileLogicService{
         return profileRepository.findByPrHpAndPrUserpw(prHp,prUserpw).map(ProfileDto::from).orElseThrow(
                 () -> new EntityNotFoundException("회원이없습니다!"));
     }
+
+    public ProfileDto getProfileElements(Long prIdx){
+        return profileRepository.findById(prIdx)
+                .map(ProfileDto::from)
+                .orElseThrow(() -> new EntityNotFoundException("유저가 없는데여 - prIdx :" + prIdx));
+    }
 }

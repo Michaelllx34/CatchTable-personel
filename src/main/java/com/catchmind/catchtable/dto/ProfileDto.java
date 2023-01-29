@@ -27,6 +27,10 @@ public record ProfileDto(
         return new ProfileDto(prIdx, prNick, prName, prIntro, prRegion, prHp, prUserpw, prGender, prBirth, prMemo, null, null, prReview, prNoshow, prBlock, prPoint);
     }
 
+    public static ProfileDto of(Long prIdx){
+        return new ProfileDto(prIdx,null,null,null,null,null,null,null,null,null,null,null,0,0,false,0);
+    }
+
     public static ProfileDto of(Long prIdx, String prNick, String prName, String prIntro, String prRegion, String prHp, String prUserpw, String prGender, String prBirth, String prMemo, LocalDateTime regDate, LocalDateTime updateDate, int prReview, int prNoshow, boolean prBlock, int prPoint){
         return new ProfileDto(prIdx, prNick, prName, prIntro, prRegion, prHp, prUserpw, prGender, prBirth, prMemo, regDate, updateDate, prReview, prNoshow, prBlock,prPoint);
     }
@@ -49,6 +53,12 @@ public record ProfileDto(
                 entity.getPrNoshow(),
                 entity.isPrBlock(),
                 entity.getPrPoint()
+        );
+    }
+
+    public Profile toEntity() {
+        return Profile.of(
+                prIdx
         );
     }
 

@@ -49,4 +49,12 @@ public class Profile extends AuditingFields{
         this.prBlock = prBlock;
         this.prPoint = prPoint;
     }
+
+    public Profile(Long prIdx){
+        this.prIdx = prIdx;
+    }
+
+    public static Profile of(Long prIdx) {
+        return new Profile(prIdx);
+    }
 }
