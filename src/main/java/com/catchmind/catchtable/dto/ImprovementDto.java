@@ -1,10 +1,6 @@
 package com.catchmind.catchtable.dto;
 
-import com.catchmind.catchtable.domain.Ask;
 import com.catchmind.catchtable.domain.Improvement;
-import com.catchmind.catchtable.domain.Notice;
-import com.catchmind.catchtable.domain.Profile;
-import com.catchmind.catchtable.domain.type.AskStatus;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +10,7 @@ public record ImprovementDto(
         String impContent,
         ProfileDto profileDto,
         String impAnswer,
-        String impStatus,
+        boolean impStatus,
         LocalDateTime regDate,
         LocalDateTime updateDate
 ) {
@@ -24,11 +20,11 @@ public record ImprovementDto(
                 improvement.getImpTitle(),
                 improvement.getImpContent(),
                 ProfileDto.from(improvement.getProfile()),
-                        improvement.getImpAnswer(),
-                        improvement.getImpStatus().getDescription(),
+                improvement.getImpAnswer(),
+                improvement.isImpStatus(),
                 improvement.getRegDate(),
-                        improvement.getUpdateDate()
-                        );
+                improvement.getUpdateDate()
+                );
 }
 
     public static ImprovementDto of(
@@ -36,14 +32,14 @@ public record ImprovementDto(
             String impContent,
             ProfileDto profileDto,
             String impAnswer){
-        return new ImprovementDto(0L, impTitle, impContent, profileDto, impAnswer, null, null, null );
+        return new ImprovementDto(0L, impTitle, impContent, profileDto, impAnswer, false, null, null );
     }
 
     public Improvement toImprovementEntity(){
         return Improvement.of(
                 impTitle,
                 impContent,
-                profileDto.toEntity(),
+                profileDto.toEntityIdx(),
                 impAnswer
         );
     }

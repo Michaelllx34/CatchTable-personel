@@ -28,12 +28,12 @@ public class QComment extends EntityPathBase<Comment> {
 
     public final NumberPath<Long> comIdx = createNumber("comIdx", Long.class);
 
-    public final QReview id;
-
     public final QProfile profile;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;
+
+    public final QReview review;
 
     public QComment(String variable) {
         this(Comment.class, forVariable(variable), INITS);
@@ -53,8 +53,8 @@ public class QComment extends EntityPathBase<Comment> {
 
     public QComment(Class<? extends Comment> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.id = inits.isInitialized("id") ? new QReview(forProperty("id"), inits.get("id")) : null;
         this.profile = inits.isInitialized("profile") ? new QProfile(forProperty("profile")) : null;
+        this.review = inits.isInitialized("review") ? new QReview(forProperty("review"), inits.get("review")) : null;
     }
 
 }

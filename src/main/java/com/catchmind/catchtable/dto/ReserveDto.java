@@ -1,4 +1,5 @@
 package com.catchmind.catchtable.dto;
+import com.catchmind.catchtable.domain.Profile;
 import com.catchmind.catchtable.domain.Reserve;
 
 import java.time.LocalDateTime;
@@ -6,7 +7,6 @@ import java.time.LocalDateTime;
 public record ReserveDto(
         Long resIdx,
         ResAdminDto resAdminDto,
-
         BistroInfoDto bistroInfoDto,
         ProfileDto profileDto,
         BistroDetailDto bistroDetailDto,
@@ -18,12 +18,13 @@ public record ReserveDto(
         String resMonth,
         String resDay,
         String resReason,
-        int resPerson,
+        Long resPerson,
         String resTime,
         String resStatus,
-
         LocalDateTime regDate,
-        LocalDateTime updateDate
+        LocalDateTime updateDate,
+        boolean revStatus
+
 ) {
 
     public static ReserveDto from(Reserve reserve){
@@ -45,8 +46,31 @@ public record ReserveDto(
                 reserve.getResTime(),
                 reserve.getResStatus().getDescription(),
                 reserve.getRegDate(),
-                reserve.getUpdateDate()
+                reserve.getUpdateDate(),
+                reserve.isRevStatus()
 
         );
     }
+
+    public static ReserveDto of(Long resIdx) {
+        return new ReserveDto(resIdx,null,null,null,null,null,null,null,null,null,null,null,null,0L,null,null,null,null, false);
+    }
+
+    public static ReserveDto of(boolean revStatus) {
+        return new ReserveDto(0L,null,null,null,null,null,null,null,null,null,null,null,null,0L,null,null,null,null, revStatus);
+    }
+
+    public Reserve toEntity() {
+        return Reserve.of(
+                resIdx
+        );
+    }
+
+    public Reserve toRevStatus(){
+        return Reserve.of(
+                revStatus
+        );
+    }
+
+
 }

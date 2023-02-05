@@ -1,6 +1,5 @@
 package com.catchmind.catchtable.dto;
 
-import com.catchmind.catchtable.domain.Admin;
 import com.catchmind.catchtable.domain.Notice;
 
 import java.time.LocalDateTime;

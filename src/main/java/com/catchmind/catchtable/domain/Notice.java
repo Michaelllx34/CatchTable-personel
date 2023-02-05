@@ -1,7 +1,6 @@
 package com.catchmind.catchtable.domain;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;

@@ -1,8 +1,6 @@
 package com.catchmind.catchtable.dto;
 
 import com.catchmind.catchtable.domain.Ask;
-import com.catchmind.catchtable.domain.type.AskStatus;
-import lombok.Builder;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +10,7 @@ public record AskDto(
         String askContent,
         ProfileDto profileDto,
         String askAnswer,
-        String askStatus,
+        boolean askStatus,
         LocalDateTime regDate,
         LocalDateTime updateDate
 ) {
@@ -25,7 +23,7 @@ public record AskDto(
                 ProfileDto.from(ask.getProfile()),
 //                ask.getProfile().getPrIdx(),
                 ask.getAskAnswer(),
-                ask.getAskStatus().getDescription(),
+                ask.isAskStatus(),
                 ask.getRegDate(),
                 ask.getUpdateDate()
         );
@@ -36,17 +34,25 @@ public record AskDto(
             String askContent,
             ProfileDto profileDto,
             String askAnswer){
-        return  new AskDto(0L, askTitle, askContent,profileDto, askAnswer, null, null, null );
+        return  new AskDto(0L, askTitle, askContent,profileDto, askAnswer, false, null, null );
     }
+
+
 
     public Ask toEntity(){
         return Ask.of(
                 askTitle,
                 askContent,
-                profileDto.toEntity(),
+                profileDto.toEntityIdx(),
                 askAnswer
 
         );
     }
 
+    public Ask toEntity1(){
+        return Ask.of1(
+                askTitle,
+                askContent
+        );
+    }
 }

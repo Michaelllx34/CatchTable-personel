@@ -19,8 +19,6 @@ public class QProfile extends EntityPathBase<Profile> {
 
     public static final QProfile profile = new QProfile("profile");
 
-    public final QAuditingFields _super = new QAuditingFields(this);
-
     public final StringPath prBirth = createString("prBirth");
 
     public final BooleanPath prBlock = createBoolean("prBlock");
@@ -49,11 +47,7 @@ public class QProfile extends EntityPathBase<Profile> {
 
     public final StringPath prUserpw = createString("prUserpw");
 
-    //inherited
-    public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;
-
-    //inherited
-    public final DateTimePath<java.time.LocalDateTime> updateDate = _super.updateDate;
+    public final EnumPath<MemberRole> role = createEnum("role", MemberRole.class);
 
     public QProfile(String variable) {
         super(Profile.class, forVariable(variable));

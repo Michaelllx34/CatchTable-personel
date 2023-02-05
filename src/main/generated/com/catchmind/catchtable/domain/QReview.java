@@ -24,24 +24,22 @@ public class QReview extends EntityPathBase<Review> {
 
     public final QAuditingFields _super = new QAuditingFields(this);
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
-
-    public final StringPath orgNm = createString("orgNm");
-
     public final QProfile profile;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;
 
+    public final QResAdmin resAdmin;
+
+    public final QReserve reserve;
+
     public final StringPath revContent = createString("revContent");
 
-    public final NumberPath<Integer> revLike = createNumber("revLike", Integer.class);
+    public final NumberPath<Long> revIdx = createNumber("revIdx", Long.class);
+
+    public final NumberPath<Long> revLike = createNumber("revLike", Long.class);
 
     public final NumberPath<Double> revScore = createNumber("revScore", Double.class);
-
-    public final StringPath savedNm = createString("savedNm");
-
-    public final StringPath savedPath = createString("savedPath");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updateDate = _super.updateDate;
@@ -65,6 +63,8 @@ public class QReview extends EntityPathBase<Review> {
     public QReview(Class<? extends Review> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.profile = inits.isInitialized("profile") ? new QProfile(forProperty("profile")) : null;
+        this.resAdmin = inits.isInitialized("resAdmin") ? new QResAdmin(forProperty("resAdmin")) : null;
+        this.reserve = inits.isInitialized("reserve") ? new QReserve(forProperty("reserve"), inits.get("reserve")) : null;
     }
 
 }

@@ -30,12 +30,14 @@ public class QDeclareReview extends EntityPathBase<DeclareReview> {
 
     public final StringPath derNick = createString("derNick");
 
-    public final QReview id;
+    public final StringPath derTitle = createString("derTitle");
 
     public final QProfile profile;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;
+
+    public final QReview review;
 
     public QDeclareReview(String variable) {
         this(DeclareReview.class, forVariable(variable), INITS);
@@ -55,8 +57,8 @@ public class QDeclareReview extends EntityPathBase<DeclareReview> {
 
     public QDeclareReview(Class<? extends DeclareReview> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.id = inits.isInitialized("id") ? new QReview(forProperty("id"), inits.get("id")) : null;
         this.profile = inits.isInitialized("profile") ? new QProfile(forProperty("profile")) : null;
+        this.review = inits.isInitialized("review") ? new QReview(forProperty("review"), inits.get("review")) : null;
     }
 
 }

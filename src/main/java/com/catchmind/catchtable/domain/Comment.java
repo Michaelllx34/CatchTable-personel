@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
@@ -19,13 +20,14 @@ public class Comment extends AuditingField {
     private String comContent;              // 댓글 내용
     @ManyToOne(optional = false)
     @JoinColumn(name = "rev_idx")
-    private Review id;                  // 리뷰 번호
+    private Review review;                  // 리뷰 번호
 
     protected Comment() {}
 
-    public Comment(Profile profile, String comContent, Review id) {
+    public Comment(Long comIdx, Profile profile, String comContent, Review review) {
+        this.comIdx = comIdx;
         this.profile = profile;
         this.comContent = comContent;
-        this.id = id;
+        this.review = review;
     }
 }

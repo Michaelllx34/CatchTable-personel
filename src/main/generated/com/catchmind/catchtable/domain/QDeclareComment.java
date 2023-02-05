@@ -32,12 +32,14 @@ public class QDeclareComment extends EntityPathBase<DeclareComment> {
 
     public final StringPath decNick = createString("decNick");
 
-    public final QReview id;
+    public final StringPath decTitle = createString("decTitle");
 
     public final QProfile profile;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;
+
+    public final QReview review;
 
     public QDeclareComment(String variable) {
         this(DeclareComment.class, forVariable(variable), INITS);
@@ -58,8 +60,8 @@ public class QDeclareComment extends EntityPathBase<DeclareComment> {
     public QDeclareComment(Class<? extends DeclareComment> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.comment = inits.isInitialized("comment") ? new QComment(forProperty("comment"), inits.get("comment")) : null;
-        this.id = inits.isInitialized("id") ? new QReview(forProperty("id"), inits.get("id")) : null;
         this.profile = inits.isInitialized("profile") ? new QProfile(forProperty("profile")) : null;
+        this.review = inits.isInitialized("review") ? new QReview(forProperty("review"), inits.get("review")) : null;
     }
 
 }

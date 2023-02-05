@@ -1,15 +1,13 @@
 package com.catchmind.catchtable.domain;
 
-import com.catchmind.catchtable.domain.type.AskStatus;
-import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
 import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
-@Getter
+@Data
 @ToString(callSuper = true)
 @Entity
 public class Improvement extends AuditingFields {
@@ -22,12 +20,12 @@ public class Improvement extends AuditingFields {
     @JoinColumn(name = "pr_idx")
     private Profile profile;
     private String impAnswer;
-    @Enumerated(EnumType.STRING)
-    private AskStatus impStatus;
+
+    private boolean impStatus;
 
     protected Improvement(){}
 
-    public Improvement(Long impIdx, String impTitle, String impContent, Profile profile, String impAnswer, AskStatus impStatus) {
+    public Improvement(Long impIdx, String impTitle, String impContent, Profile profile, String impAnswer, boolean impStatus) {
         this.impIdx = impIdx;
         this.impTitle = impTitle;
         this.impContent = impContent;

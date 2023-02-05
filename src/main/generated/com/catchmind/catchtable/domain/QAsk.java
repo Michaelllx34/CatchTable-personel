@@ -30,7 +30,7 @@ public class QAsk extends EntityPathBase<Ask> {
 
     public final NumberPath<Long> askIdx = createNumber("askIdx", Long.class);
 
-    public final EnumPath<com.catchmind.catchtable.domain.type.AskStatus> askStatus = createEnum("askStatus", com.catchmind.catchtable.domain.type.AskStatus.class);
+    public final BooleanPath askStatus = createBoolean("askStatus");
 
     public final StringPath askTitle = createString("askTitle");
 

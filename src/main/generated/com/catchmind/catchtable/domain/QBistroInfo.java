@@ -26,8 +26,6 @@ public class QBistroInfo extends EntityPathBase<BistroInfo> {
 
     public final StringPath bisCategory = createString("bisCategory");
 
-    public final StringPath bisConvenience = createString("bisConvenience");
-
     public final StringPath bisDesc = createString("bisDesc");
 
     public final StringPath bisDinner = createString("bisDinner");

@@ -45,7 +45,7 @@ public class QReserve extends EntityPathBase<Reserve> {
 
     public final StringPath resMonth = createString("resMonth");
 
-    public final NumberPath<Integer> resPerson = createNumber("resPerson", Integer.class);
+    public final NumberPath<Long> resPerson = createNumber("resPerson", Long.class);
 
     public final StringPath resReason = createString("resReason");
 
@@ -54,6 +54,8 @@ public class QReserve extends EntityPathBase<Reserve> {
     public final EnumPath<com.catchmind.catchtable.domain.type.ReservationType> resStatus = createEnum("resStatus", com.catchmind.catchtable.domain.type.ReservationType.class);
 
     public final StringPath resTime = createString("resTime");
+
+    public final BooleanPath revStatus = createBoolean("revStatus");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updateDate = _super.updateDate;

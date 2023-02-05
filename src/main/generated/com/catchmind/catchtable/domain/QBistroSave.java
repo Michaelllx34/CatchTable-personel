@@ -22,6 +22,8 @@ public class QBistroSave extends EntityPathBase<BistroSave> {
 
     public static final QBistroSave bistroSave = new QBistroSave("bistroSave");
 
+    public final QBistroDetail bistroDetail;
+
     public final QProfile profile;
 
     public final QResAdmin resAdmin;
@@ -46,6 +48,7 @@ public class QBistroSave extends EntityPathBase<BistroSave> {
 
     public QBistroSave(Class<? extends BistroSave> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.bistroDetail = inits.isInitialized("bistroDetail") ? new QBistroDetail(forProperty("bistroDetail"), inits.get("bistroDetail")) : null;
         this.profile = inits.isInitialized("profile") ? new QProfile(forProperty("profile")) : null;
         this.resAdmin = inits.isInitialized("resAdmin") ? new QResAdmin(forProperty("resAdmin")) : null;
     }

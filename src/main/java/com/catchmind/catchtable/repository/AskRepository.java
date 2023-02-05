@@ -1,12 +1,15 @@
 package com.catchmind.catchtable.repository;
 
 import com.catchmind.catchtable.domain.Ask;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface AskRepository extends JpaRepository<Ask, Long> {
 
-    List<Ask> findAllByProfile_PrIdx(Long prIdx);
+    Ask findByAskIdx(Long AskIdx);
+    Page<Ask> findAllByProfile_PrIdx(Long prIdx, Pageable pageable);
 
 }
